@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:task_manager_get_x/UI/screens/sing_in/sing_in_screen.dart';
 import 'package:task_manager_get_x/UI/screens/update_password/update_password_screen.dart';
+import 'package:task_manager_get_x/common/utils/app_padding.dart';
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen({super.key});
@@ -24,7 +25,9 @@ class _OtpScreenState extends State<OtpScreen> {
       backgroundColor: Colors.grey[300],
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          padding: EdgeInsets.symmetric(
+            horizontal: AppPadding.authScreenSidePadding,
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

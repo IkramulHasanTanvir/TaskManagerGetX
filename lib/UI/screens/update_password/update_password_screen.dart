@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task_manager_get_x/UI/screens/sing_in/sing_in_screen.dart';
+import 'package:task_manager_get_x/common/utils/app_padding.dart';
 
 class UpdatePasswordScreen extends StatefulWidget {
   const UpdatePasswordScreen({super.key});
@@ -14,7 +15,8 @@ class UpdatePasswordScreen extends StatefulWidget {
 
 class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
   final TextEditingController _passwordTEController = TextEditingController();
-  final TextEditingController _newPasswordTEController = TextEditingController();
+  final TextEditingController _newPasswordTEController =
+      TextEditingController();
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
 
   @override
@@ -23,7 +25,9 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
       backgroundColor: Colors.grey[300],
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          padding: EdgeInsets.symmetric(
+            horizontal: AppPadding.authScreenSidePadding,
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -78,7 +82,7 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
               return null;
             },
           ),
-          SizedBox(height: size.height * 0.016),
+          SizedBox(height: size.height * 0.026),
           ElevatedButton(
             onPressed: _onTapNextScreen,
             child: const Text('Save'),

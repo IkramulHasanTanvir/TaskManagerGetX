@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task_manager_get_x/UI/screens/otp_verify/otp_verify_screen.dart';
 import 'package:task_manager_get_x/UI/screens/sing_in/sing_in_screen.dart';
+import 'package:task_manager_get_x/common/utils/app_padding.dart';
 
 class VerificationEmailScreen extends StatefulWidget {
   const VerificationEmailScreen({super.key});
@@ -24,7 +25,9 @@ class _VerificationEmailScreenState extends State<VerificationEmailScreen> {
       backgroundColor: Colors.grey[300],
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          padding: EdgeInsets.symmetric(
+            horizontal: AppPadding.authScreenSidePadding,
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

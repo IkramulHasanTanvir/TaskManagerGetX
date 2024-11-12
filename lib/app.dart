@@ -35,7 +35,7 @@ class TaskManagerApp extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.grey[600],
           foregroundColor: Colors.grey[300],
-          fixedSize: const Size.fromWidth(double.maxFinite),
+          fixedSize: const Size(double.maxFinite,54),
         ),
       );
   }

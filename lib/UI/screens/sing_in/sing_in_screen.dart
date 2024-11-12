@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task_manager_get_x/UI/screens/sing_up/sing_up_screen.dart';
+import 'package:task_manager_get_x/common/utils/app_padding.dart';
 import 'package:task_manager_get_x/UI/screens/verification_email/verification_email_screen.dart';
 
 class SingInScreen extends StatefulWidget {
@@ -24,7 +25,9 @@ class _SingInScreenState extends State<SingInScreen> {
       backgroundColor: Colors.grey[300],
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          padding: EdgeInsets.symmetric(
+            horizontal: AppPadding.authScreenSidePadding,
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -79,7 +82,7 @@ class _SingInScreenState extends State<SingInScreen> {
               return null;
             },
           ),
-          SizedBox(height: size.height * 0.016),
+          SizedBox(height: size.height * 0.026),
           ElevatedButton(
             onPressed: _onTapNextScreen,
             child: const Text('Sing In'),
