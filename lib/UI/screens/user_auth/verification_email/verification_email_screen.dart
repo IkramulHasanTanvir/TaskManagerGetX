@@ -5,17 +5,17 @@ import 'package:task_manager_get_x/UI/screens/user_auth/otp_verify/otp_verify_sc
 import 'package:task_manager_get_x/UI/screens/user_auth/sing_in/sing_in_screen.dart';
 import 'package:task_manager_get_x/common/utils/app_padding.dart';
 
-class VerificationEmailScreen extends StatefulWidget {
-  const VerificationEmailScreen({super.key});
+class VerityEmailScreen extends StatefulWidget {
+  const VerityEmailScreen({super.key});
 
   static String name = '/email';
 
   @override
-  State<VerificationEmailScreen> createState() =>
-      _VerificationEmailScreenState();
+  State<VerityEmailScreen> createState() =>
+      _VerityEmailScreenState();
 }
 
-class _VerificationEmailScreenState extends State<VerificationEmailScreen> {
+class _VerityEmailScreenState extends State<VerityEmailScreen> {
   final TextEditingController _emailTEController = TextEditingController();
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:task_manager_get_x/UI/app_bar/tm_app_bar.dart';
 import 'package:task_manager_get_x/UI/screens/home/controller/home_screen_controller.dart';
 import 'package:task_manager_get_x/UI/screens/user_task/canceled/canceled_task_screen.dart';
 import 'package:task_manager_get_x/UI/screens/user_task/completed/completed_task_screen.dart';
@@ -28,9 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.grey[300],
-      ),
+      appBar: const TmAppBar(),
       body: Obx(() {
         return _screens[homeController.selectedIndex.value];
       }),
@@ -44,21 +43,38 @@ class _HomeScreenState extends State<HomeScreen> {
         selectedIndex: homeController.selectedIndex.value,
         onDestinationSelected: homeController.updateSelectedIndex,
         backgroundColor: Colors.grey[300],
+        indicatorColor: Colors.grey[600],
         destinations: const [
           NavigationDestination(
             icon: Icon(Icons.new_label_outlined),
+            selectedIcon: Icon(
+              Icons.new_label_outlined,
+              color: Colors.white,
+            ),
             label: 'New',
           ),
           NavigationDestination(
             icon: Icon(Icons.label_important),
+            selectedIcon: Icon(
+              Icons.label_important,
+              color: Colors.white,
+            ),
             label: 'Completed',
           ),
           NavigationDestination(
             icon: Icon(Icons.label_important_outline),
+            selectedIcon: Icon(
+              Icons.label_important_outline,
+              color: Colors.white,
+            ),
             label: 'Progress',
           ),
           NavigationDestination(
             icon: Icon(Icons.label_off_outlined),
+            selectedIcon: Icon(
+              Icons.label_off_outlined,
+              color: Colors.white,
+            ),
             label: 'Canceled',
           ),
         ],

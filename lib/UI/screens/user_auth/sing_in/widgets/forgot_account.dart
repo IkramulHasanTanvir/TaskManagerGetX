@@ -13,7 +13,7 @@ class ForgotAccount extends StatelessWidget {
       child: Column(children: [
         TextButton(
           onPressed: () {
-            Get.to(() => const VerificationEmailScreen());
+            Get.to(() => const VerityEmailScreen());
           },
           child: Text(
             'Forgot Password?',
