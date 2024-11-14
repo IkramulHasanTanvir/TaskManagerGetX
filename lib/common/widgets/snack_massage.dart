@@ -6,6 +6,5 @@ void snackMassage(bool isError, String message) {
     isError == true ? 'error' : 'success',
     message,
     colorText: isError == true ? Colors.red : Colors.green,
-    borderColor: isError == true ? Colors.red : Colors.green,
   );
 }

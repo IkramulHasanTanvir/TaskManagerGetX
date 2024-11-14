@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:task_manager_get_x/UI/screens/sing_in/sing_in_screen.dart';
+import 'package:task_manager_get_x/UI/screens/user_auth/sing_in/sing_in_screen.dart';
 import 'package:task_manager_get_x/common/utils/app_padding.dart';
 
 class UpdatePasswordScreen extends StatefulWidget {

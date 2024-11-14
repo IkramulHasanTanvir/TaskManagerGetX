@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:task_manager_get_x/UI/screens/otp_verify/otp_verify_screen.dart';
-import 'package:task_manager_get_x/UI/screens/sing_in/sing_in_screen.dart';
-import 'package:task_manager_get_x/UI/screens/sing_up/sing_up_screen.dart';
-import 'package:task_manager_get_x/UI/screens/splash/splash_screen.dart';
-import 'package:task_manager_get_x/UI/screens/update_password/update_password_screen.dart';
-import 'package:task_manager_get_x/UI/screens/verification_email/verification_email_screen.dart';
+import 'package:task_manager_get_x/UI/screens/home/home_screen.dart';
+import 'package:task_manager_get_x/UI/screens/splash_screen.dart';
+import 'package:task_manager_get_x/UI/screens/user_auth/otp_verify/otp_verify_screen.dart';
+import 'package:task_manager_get_x/UI/screens/user_auth/sing_in/sing_in_screen.dart';
+import 'package:task_manager_get_x/UI/screens/user_auth/sing_up/sing_up_screen.dart';
+import 'package:task_manager_get_x/UI/screens/user_auth/update_password/update_password_screen.dart';
+import 'package:task_manager_get_x/UI/screens/user_auth/verification_email/verification_email_screen.dart';
+import 'package:task_manager_get_x/controller_binder.dart';
 
 class TaskManagerApp extends StatelessWidget {
   const TaskManagerApp({super.key});
@@ -15,9 +17,12 @@ class TaskManagerApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        scaffoldBackgroundColor: Colors.grey[300],
+        colorSchemeSeed: Colors.blue,
         inputDecorationTheme: _buildInputDecorationTheme(),
         elevatedButtonTheme: _buildElevatedButtonThemeData(),
       ),
+      initialBinding: ControllerBinder(),
       initialRoute: SplashScreen.name,
       routes: {
         SplashScreen.name: (context) => const SplashScreen(),
@@ -26,6 +31,7 @@ class TaskManagerApp extends StatelessWidget {
         UpdatePasswordScreen.name: (context) => const UpdatePasswordScreen(),
         VerificationEmailScreen.name: (context) => const VerificationEmailScreen(),
         OtpScreen.name: (context) => const OtpScreen(),
+        HomeScreen.name: (context) => const HomeScreen(),
       },
     );
   }

@@ -1,16 +1,17 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:task_manager_get_x/data/data_controller/auth_controller.dart';
 import 'package:task_manager_get_x/data/models/network_response.dart';
 import 'package:task_manager_get_x/data/utils/debug_print.dart';
 
 class NetworkCaller {
-  Future<NetworkResponse> getRequest({required String url}) async {
+  static Future<NetworkResponse> getRequest({required String url}) async {
     try {
       Uri uri = Uri.parse(url);
       debugPrint(url);
       Map<String, String> headers = {
-        'Content-Type': 'application/json',
+        'token': AuthController.accessToken.toString(),
       };
 
       final Response response = await get(
@@ -50,7 +51,7 @@ class NetworkCaller {
     }
   }
 
-  Future<NetworkResponse> postRequest(
+  static Future<NetworkResponse> postRequest(
       {required String url, Map<String, dynamic>? body}) async {
     try {
       Uri uri = Uri.parse(url);
@@ -59,28 +60,30 @@ class NetworkCaller {
 
       Map<String, String> headers = {
         'Content-Type': 'application/json',
+        'token': AuthController.accessToken.toString(),
       };
 
       final Response response = await post(
         uri,
+        headers: headers,
         body: jsonEncode(body),
       );
       responsePrint(url, response.statusCode, response.body);
       requestCheck(url, headers, body!);
 
-      final encodeData = jsonDecode(response.body);
-      if (response.statusCode == 200 && encodeData['status'] == 'success') {
+      final decodeData = jsonDecode(response.body);
+      if (response.statusCode == 200 && decodeData['status'] == 'success') {
         return NetworkResponse(
           statusCode: response.statusCode,
           isSuccess: true,
-          responseBody: response.body,
+          responseBody: decodeData,
         );
       } else if (response.statusCode == 401 ||
-          response.statusCode == 404 && encodeData['status'] == 'fail') {
+          response.statusCode == 404 && decodeData['status'] == 'fail') {
         return NetworkResponse(
           statusCode: response.statusCode,
           isSuccess: false,
-          errorMassage: encodeData['data'],
+          errorMassage: decodeData['data'],
         );
       } else {
         return NetworkResponse(

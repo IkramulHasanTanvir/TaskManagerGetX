@@ -1,22 +1,22 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:task_manager_get_x/UI/screens/sing_in/sing_in_screen.dart';
-import 'package:task_manager_get_x/UI/screens/update_password/update_password_screen.dart';
+import 'package:task_manager_get_x/UI/screens/user_auth/otp_verify/otp_verify_screen.dart';
+import 'package:task_manager_get_x/UI/screens/user_auth/sing_in/sing_in_screen.dart';
 import 'package:task_manager_get_x/common/utils/app_padding.dart';
 
-class OtpScreen extends StatefulWidget {
-  const OtpScreen({super.key});
+class VerificationEmailScreen extends StatefulWidget {
+  const VerificationEmailScreen({super.key});
 
-  static String name = '/otp';
+  static String name = '/email';
 
   @override
-  State<OtpScreen> createState() => _OtpScreenState();
+  State<VerificationEmailScreen> createState() =>
+      _VerificationEmailScreenState();
 }
 
-class _OtpScreenState extends State<OtpScreen> {
-  final TextEditingController _otpTEController = TextEditingController();
+class _VerificationEmailScreenState extends State<VerificationEmailScreen> {
+  final TextEditingController _emailTEController = TextEditingController();
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
 
   @override
@@ -47,7 +47,7 @@ class _OtpScreenState extends State<OtpScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Pin Verification',
+          'Your Email',
           style: textTheme.displayMedium,
         ),
         SizedBox(height: size.height * 0.010),
@@ -57,29 +57,25 @@ class _OtpScreenState extends State<OtpScreen> {
         SizedBox(height: size.height * 0.036),
         Form(
           key: _globalKey,
-          child: PinCodeTextField(
-            controller: _otpTEController,
-            backgroundColor: Colors.transparent,
-            appContext: (context),
-            length: 6,
-            pinTheme: PinTheme(
-              fieldWidth: 44,
-              fieldHeight: 56,
-              activeFillColor: Colors.transparent,
-              selectedFillColor: Colors.transparent,
-              inactiveFillColor: Colors.transparent,
-              inactiveColor: Colors.grey[200],
-              selectedColor: Colors.grey,
-              shape: PinCodeFieldShape.box,
-              borderRadius: BorderRadius.circular(8),
+          child: TextFormField(
+            controller: _emailTEController,
+            keyboardType: TextInputType.emailAddress,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            decoration: const InputDecoration(
+              labelText: 'Email',
             ),
-            enableActiveFill: true,
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'Enter valid value';
+              }
+              return null;
+            },
           ),
         ),
         SizedBox(height: size.height * 0.036),
         ElevatedButton(
           onPressed: _onTapNextScreen,
-          child: const Text('Verify'),
+          child: const Text('Next'),
         ),
         SizedBox(height: size.height * 0.046),
       ],
@@ -116,12 +112,12 @@ class _OtpScreenState extends State<OtpScreen> {
     if (!_globalKey.currentState!.validate()) {
       return;
     }
-    Get.to(() => const UpdatePasswordScreen());
+    Get.to(() => const OtpScreen());
   }
 
   @override
   void dispose() {
     super.dispose();
-    _otpTEController.dispose();
+    _emailTEController.dispose();
   }
 }
