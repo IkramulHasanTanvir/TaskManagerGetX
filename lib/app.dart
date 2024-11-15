@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task_manager_get_x/UI/screens/home/home_screen.dart';
 import 'package:task_manager_get_x/UI/screens/splash_screen.dart';
-import 'package:task_manager_get_x/UI/screens/user_auth/otp_verify/otp_verify_screen.dart';
 import 'package:task_manager_get_x/UI/screens/user_auth/profile/profile_update_screen.dart';
 import 'package:task_manager_get_x/UI/screens/user_auth/sing_in/sing_in_screen.dart';
 import 'package:task_manager_get_x/UI/screens/user_auth/sing_up/sing_up_screen.dart';
@@ -30,9 +29,7 @@ class TaskManagerApp extends StatelessWidget {
         SplashScreen.name: (context) => const SplashScreen(),
         SingInScreen.name: (context) => const SingInScreen(),
         SingUpScreen.name: (context) => const SingUpScreen(),
-        UpdatePasswordScreen.name: (context) => const UpdatePasswordScreen(),
         VerityEmailScreen.name: (context) => const VerityEmailScreen(),
-        OtpScreen.name: (context) => const OtpScreen(),
         HomeScreen.name: (context) => const HomeScreen(),
         ProfileUpdateScreen.name: (context) => const ProfileUpdateScreen(),
         AddNewScreen.name: (context) => const AddNewScreen(),

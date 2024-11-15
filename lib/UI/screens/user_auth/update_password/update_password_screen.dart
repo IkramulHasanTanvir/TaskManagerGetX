@@ -1,23 +1,15 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:task_manager_get_x/UI/screens/user_auth/sing_in/sing_in_screen.dart';
+import 'package:task_manager_get_x/UI/screens/user_auth/update_password/widgets/password_form.dart';
 import 'package:task_manager_get_x/common/utils/app_padding.dart';
+import 'package:task_manager_get_x/common/widgets/have_account_section.dart';
 
-class UpdatePasswordScreen extends StatefulWidget {
-  const UpdatePasswordScreen({super.key});
+class UpdatePasswordScreen extends StatelessWidget {
+  const UpdatePasswordScreen({super.key, required this.email, required this.otp});
+
+  final String email;
+  final String otp;
 
   static String name = '/password';
-
-  @override
-  State<UpdatePasswordScreen> createState() => _UpdatePasswordScreenState();
-}
-
-class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
-  final TextEditingController _passwordTEController = TextEditingController();
-  final TextEditingController _newPasswordTEController =
-      TextEditingController();
-  final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -28,109 +20,16 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
           padding: EdgeInsets.symmetric(
             horizontal: AppPadding.authScreenSidePadding,
           ),
-          child: SingleChildScrollView(
+          child:  SingleChildScrollView(
             child: Column(
               children: [
-                _buildFormSection(),
-                _buildHaveAccountSection(),
+                PasswordForm(email: email, otp: otp,),
+                const HaveAccountSection(),
               ],
             ),
           ),
         ),
       ),
     );
-  }
-
-  Widget _buildFormSection() {
-    final TextTheme textTheme = Theme.of(context).textTheme;
-    final Size size = MediaQuery.sizeOf(context);
-    return Form(
-      key: _globalKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: size.height * 0.2),
-          Text(
-            'Update password',
-            style: textTheme.displayMedium,
-          ),
-          SizedBox(height: size.height * 0.016),
-          TextFormField(
-            controller: _passwordTEController,
-            obscureText: true,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            decoration: const InputDecoration(
-              labelText: 'New Password',
-            ),
-            validator: (value) {
-              if (value!.length < 6) {
-                return 'Enter value a minimum 6 character';
-              }
-              return null;
-            },
-          ),
-          SizedBox(height: size.height * 0.010),
-          TextFormField(
-            controller: _newPasswordTEController,
-            obscureText: true,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            decoration: const InputDecoration(
-              labelText: 'Confirm Password',
-            ),
-            validator: (value) {
-              if (value!.length < 6) {
-                return 'Enter value a minimum 6 character';
-              }
-              return null;
-            },
-          ),
-          SizedBox(height: size.height * 0.026),
-          ElevatedButton(
-            onPressed: _onTapNextScreen,
-            child: const Text('Save'),
-          ),
-          SizedBox(height: size.height * 0.046),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildHaveAccountSection() {
-    return Center(
-      child: RichText(
-        text: TextSpan(
-            style: TextStyle(
-              color: Colors.grey[600],
-              fontWeight: FontWeight.w600,
-            ),
-            children: [
-              const TextSpan(
-                text: "have account?  ",
-              ),
-              TextSpan(
-                  style: TextStyle(
-                    color: Colors.grey[900],
-                  ),
-                  text: 'Sing In',
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () {
-                      Get.offAllNamed(SingInScreen.name);
-                    }),
-            ]),
-      ),
-    );
-  }
-
-  void _onTapNextScreen() {
-    if (!_globalKey.currentState!.validate()) {
-      return;
-    }
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _passwordTEController.dispose();
-    _newPasswordTEController.dispose();
   }
 }

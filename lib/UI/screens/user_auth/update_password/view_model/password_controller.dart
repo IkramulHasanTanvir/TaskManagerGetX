@@ -1,11 +1,9 @@
 import 'package:get/get.dart';
-import 'package:task_manager_get_x/UI/screens/user_auth/sing_in/model/long_in_model.dart';
-import 'package:task_manager_get_x/data/data_controller/auth_controller.dart';
 import 'package:task_manager_get_x/data/models/network_response.dart';
 import 'package:task_manager_get_x/data/services/network_caller.dart';
 import 'package:task_manager_get_x/data/utils/urls.dart';
 
-class SingInController extends GetxController {
+class PasswordController extends GetxController {
   bool get inProgress => _inProgress;
 
   bool _inProgress = false;
@@ -14,27 +12,28 @@ class SingInController extends GetxController {
 
   String? get errorMessage => _errorMessage;
 
+  String? _successMessage;
 
+  String? get successMessage => _successMessage;
 
-  Future<bool> singIn(String email, String password) async {
+  Future<bool> password(
+      String email, String otp, String password) async {
     bool isSuccess = false;
     _inProgress = true;
     update();
-
     Map<String, dynamic> requestBody = {
       "email": email,
+      "OTP": otp,
       "password": password,
     };
 
     NetworkResponse networkResponse = await NetworkCaller.postRequest(
-      url: Urls.login,
+      url: Urls.recoverResetPassword,
       body: requestBody,
     );
     if (networkResponse.isSuccess) {
-      final LongInModel longInModel =
-          LongInModel.fromJson(networkResponse.responseBody);
-      await AuthController.saveAccessToken(longInModel.token!);
       isSuccess = true;
+      _successMessage = 'Password update successes';
     } else {
       _errorMessage = networkResponse.errorMassage;
     }
