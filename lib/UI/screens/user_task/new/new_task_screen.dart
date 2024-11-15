@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:task_manager_get_x/UI/screens/user_task/add_new/add_new_screen.dart';
 import 'package:task_manager_get_x/UI/screens/user_task/new/view_model/new_task_controller.dart';
 import 'package:task_manager_get_x/UI/screens/user_task/new/widgets/summary_card.dart';
-import 'package:task_manager_get_x/UI/task/task_card_list.dart';
+import 'package:task_manager_get_x/UI/task/task_card_section.dart';
 import 'package:task_manager_get_x/common/utils/app_padding.dart';
 import 'package:get/get.dart';
 import 'package:task_manager_get_x/common/widgets/snack_massage.dart';
@@ -54,7 +54,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
                         child: ListView.separated(
                           itemCount: controller.taskList.length,
                           itemBuilder: (context, index) {
-                            return TaskCardList(
+                            return TaskCardSection(
                               taskModel: controller.taskList[index],
                               onRefresh: _getNewTask,
                             );
@@ -87,8 +87,11 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
         }
       },
       elevation: 0,
-      backgroundColor: Colors.grey,
-      child: const Icon(Icons.add),
+      backgroundColor: Colors.grey[600],
+      child: const Icon(
+        Icons.add,
+        color: Colors.white,
+      ),
     );
   }
 
