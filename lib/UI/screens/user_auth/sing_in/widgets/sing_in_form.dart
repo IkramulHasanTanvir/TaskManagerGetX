@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:task_manager_get_x/UI/screens/home/home_screen.dart';
 import 'package:task_manager_get_x/UI/screens/user_auth/sing_in/view_model/sing_in_controller.dart';
 import 'package:task_manager_get_x/common/widgets/snack_massage.dart';
+import 'package:task_manager_get_x/common/widgets/tm_progress_indicator.dart';
 
 class SingInFormSection extends StatefulWidget {
   const SingInFormSection({super.key});
@@ -65,7 +66,7 @@ class _SingInFormSectionState extends State<SingInFormSection> {
           GetBuilder<SingInController>(builder: (controller) {
             return Visibility(
               visible: !controller.inProgress,
-              replacement: const CircularProgressIndicator(),
+              replacement: const TMProgressIndicator(),
               child: ElevatedButton(
                 onPressed: _onTapNextScreen,
                 child: const Text('Sing In'),

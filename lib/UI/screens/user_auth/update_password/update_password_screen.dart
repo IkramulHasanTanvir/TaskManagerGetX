@@ -28,12 +28,13 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
           padding: EdgeInsets.symmetric(
             horizontal: AppPadding.authScreenSidePadding,
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _buildFormSection(),
-              _buildHaveAccountSection(),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                _buildFormSection(),
+                _buildHaveAccountSection(),
+              ],
+            ),
           ),
         ),
       ),
@@ -48,6 +49,7 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          SizedBox(height: size.height * 0.2),
           Text(
             'Update password',
             style: textTheme.displayMedium,

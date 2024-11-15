@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task_manager_get_x/UI/app_bar/tm_app_bar.dart';
-import 'package:task_manager_get_x/UI/screens/home/controller/home_screen_controller.dart';
+import 'package:task_manager_get_x/UI/screens/home/view_model/home_screen_controller.dart';
 import 'package:task_manager_get_x/UI/screens/user_task/canceled/canceled_task_screen.dart';
 import 'package:task_manager_get_x/UI/screens/user_task/completed/completed_task_screen.dart';
 import 'package:task_manager_get_x/UI/screens/user_task/new/new_task_screen.dart';

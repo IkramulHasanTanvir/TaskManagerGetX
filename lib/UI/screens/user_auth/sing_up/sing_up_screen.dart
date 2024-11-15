@@ -31,7 +31,6 @@ class _SingUpScreenState extends State<SingUpScreen> {
             horizontal: AppPadding.authScreenSidePadding,
           ),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               _buildFormSection(),
               _buildHaveAccountSection(),
@@ -50,6 +49,7 @@ class _SingUpScreenState extends State<SingUpScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          SizedBox(height: size.height * 0.1),
           Text(
             'Join with us',
             style: textTheme.displayMedium,

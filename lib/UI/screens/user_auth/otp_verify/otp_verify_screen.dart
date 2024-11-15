@@ -28,12 +28,13 @@ class _OtpScreenState extends State<OtpScreen> {
           padding: EdgeInsets.symmetric(
             horizontal: AppPadding.authScreenSidePadding,
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _buildFormSection(),
-              _buildHaveAccountSection(),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                _buildFormSection(),
+                _buildHaveAccountSection(),
+              ],
+            ),
           ),
         ),
       ),
@@ -46,6 +47,7 @@ class _OtpScreenState extends State<OtpScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        SizedBox(height: size.height * 0.2),
         Text(
           'Pin Verification',
           style: textTheme.displayMedium,

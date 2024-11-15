@@ -16,6 +16,7 @@ class _SingInScreenState extends State<SingInScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.sizeOf(context).height;
     return Scaffold(
       backgroundColor: Colors.grey[300],
       body: SafeArea(
@@ -23,12 +24,15 @@ class _SingInScreenState extends State<SingInScreen> {
           padding: EdgeInsets.symmetric(
             horizontal: AppPadding.authScreenSidePadding,
           ),
-          child: const Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SingInFormSection(),
-              ForgotAccount(),
-            ],
+          child: SingleChildScrollView(
+            child:  Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(height: screenHeight * 0.2),
+                const SingInFormSection(),
+                const ForgotAccount(),
+              ],
+            ),
           ),
         ),
       ),

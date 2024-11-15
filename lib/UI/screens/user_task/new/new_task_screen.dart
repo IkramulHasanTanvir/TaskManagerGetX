@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:task_manager_get_x/UI/screens/user_task/add_new/add_new_screen.dart';
 import 'package:task_manager_get_x/UI/screens/user_task/new/view_model/new_task_controller.dart';
+import 'package:task_manager_get_x/UI/screens/user_task/new/view_model/task_status_controller.dart';
 import 'package:task_manager_get_x/UI/screens/user_task/new/widgets/summary_card.dart';
 import 'package:task_manager_get_x/UI/task/task_card_section.dart';
 import 'package:task_manager_get_x/common/utils/app_padding.dart';
@@ -17,11 +18,14 @@ class NewTaskScreen extends StatefulWidget {
 
 class _NewTaskScreenState extends State<NewTaskScreen> {
   final NewTaskController _newTaskController = Get.find<NewTaskController>();
+  final TaskStatusController _taskStatusController =
+      Get.find<TaskStatusController>();
 
   @override
   void initState() {
     super.initState();
     _getNewTask();
+    _getTaskStatus();
   }
 
   @override
@@ -40,9 +44,19 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SingleChildScrollView(
+                SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
-                  child: SummaryCard(),
+                  child: GetBuilder<TaskStatusController>(
+                    builder: (controller) {
+                      return Row(
+                        children: controller.taskCountList
+                            .map(
+                              (e) => SummaryCard(taskCountModel: e),
+                            )
+                            .toList(),
+                      );
+                    },
+                  ),
                 ),
                 const SizedBox(height: 18),
                 Expanded(
@@ -99,6 +113,13 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
     final bool result = await _newTaskController.getNewTask();
     if (result == false) {
       snackMassage(true, _newTaskController.errorMessage!);
+    }
+  }
+
+  Future<void> _getTaskStatus() async {
+    final bool result = await _taskStatusController.getStatusCount();
+    if (result == false) {
+      snackMassage(true, _taskStatusController.errorMessage!);
     }
   }
 }

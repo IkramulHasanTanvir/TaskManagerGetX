@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task_manager_get_x/UI/screens/user_auth/profile/profile_update_screen.dart';
+import 'package:task_manager_get_x/UI/screens/user_auth/sing_in/sing_in_screen.dart';
+import 'package:task_manager_get_x/data/data_controller/auth_controller.dart';
 
 class TmAppBar extends StatelessWidget implements PreferredSizeWidget {
   const TmAppBar({super.key, this.isProfile = true});
@@ -14,7 +16,7 @@ class TmAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: isProfile
           ? ListTile(
               onTap: () {
-                Get.to(() => const ProfileUpdateScreen());
+                Get.toNamed(ProfileUpdateScreen.name);
               },
               contentPadding: EdgeInsets.zero,
               leading: CircleAvatar(
@@ -40,6 +42,12 @@ class TmAppBar extends StatelessWidget implements PreferredSizeWidget {
                   color: Colors.black,
                 ),
               ),
+              trailing: IconButton(
+                  onPressed: () async {
+                    await AuthController.clearAccessToken();
+                    Get.offAllNamed(SingInScreen.name);
+                  },
+                  icon: const Icon(Icons.logout)),
             )
           : null,
     );
