@@ -4,6 +4,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:task_manager_get_x/UI/screens/user_auth/otp_verify/view_model/otp_verify_controller.dart';
 import 'package:task_manager_get_x/UI/screens/user_auth/update_password/update_password_screen.dart';
 import 'package:task_manager_get_x/common/widgets/snack_massage.dart';
+import 'package:task_manager_get_x/common/widgets/tm_progress_indicator.dart';
 
 class OtpVerifyForm extends StatefulWidget {
   const OtpVerifyForm({super.key, required this.email});
@@ -55,9 +56,17 @@ class _OtpVerifyFormState extends State<OtpVerifyForm> {
           enableActiveFill: true,
         ),
         SizedBox(height: size.height * 0.036),
-        ElevatedButton(
-          onPressed: _onTapNextScreen,
-          child: const Text('Verify'),
+        GetBuilder<OTPVerifyController>(
+          builder: (controller) {
+            return Visibility(
+              visible: !controller.inProgress,
+              replacement: const TMProgressIndicator(),
+              child: ElevatedButton(
+                onPressed: _onTapNextScreen,
+                child: const Text('Verify'),
+              ),
+            );
+          }
         ),
         SizedBox(height: size.height * 0.046),
       ],

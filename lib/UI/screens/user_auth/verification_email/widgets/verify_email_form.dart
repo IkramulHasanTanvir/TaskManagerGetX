@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:task_manager_get_x/UI/screens/user_auth/otp_verify/otp_verify_screen.dart';
 import 'package:task_manager_get_x/UI/screens/user_auth/verification_email/view_model/verify_email_controller.dart';
 import 'package:task_manager_get_x/common/widgets/snack_massage.dart';
+import 'package:task_manager_get_x/common/widgets/tm_progress_indicator.dart';
 
 class VerifyEmailForm extends StatefulWidget {
   const VerifyEmailForm({super.key});
@@ -52,9 +53,17 @@ class _VerifyEmailFormState extends State<VerifyEmailForm> {
           ),
         ),
         SizedBox(height: size.height * 0.036),
-        ElevatedButton(
-          onPressed: _onTapNextScreen,
-          child: const Text('Next'),
+        GetBuilder<VerifyEmailController>(
+            builder: (controller) {
+              return Visibility(
+                visible: !controller.inProgress,
+                replacement: const TMProgressIndicator(),
+                child: ElevatedButton(
+                  onPressed: _onTapNextScreen,
+                  child: const Text('Verify'),
+                ),
+              );
+            }
         ),
         SizedBox(height: size.height * 0.046),
       ],

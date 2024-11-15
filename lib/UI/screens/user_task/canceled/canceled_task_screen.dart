@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:task_manager_get_x/UI/screens/user_task/canceled/cancel_task_controller.dart';
-import 'package:task_manager_get_x/UI/screens/user_task/completed/view_model/completed_task_controller.dart';
+import 'package:task_manager_get_x/UI/screens/user_task/canceled/view_model/cancel_task_controller.dart';
 import 'package:task_manager_get_x/UI/task/task_card_section.dart';
 import 'package:task_manager_get_x/common/utils/app_padding.dart';
 import 'package:task_manager_get_x/common/widgets/snack_massage.dart';

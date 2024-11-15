@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:task_manager_get_x/UI/screens/user_auth/sing_in/sing_in_screen.dart';
 import 'package:task_manager_get_x/UI/screens/user_auth/update_password/view_model/password_controller.dart';
 import 'package:task_manager_get_x/common/widgets/snack_massage.dart';
+import 'package:task_manager_get_x/common/widgets/tm_progress_indicator.dart';
 
 class PasswordForm extends StatefulWidget {
   const PasswordForm({super.key, required this.email, required this.otp});
@@ -67,9 +68,17 @@ class _PasswordFormState extends State<PasswordForm> {
             },
           ),
           SizedBox(height: size.height * 0.026),
-          ElevatedButton(
-            onPressed: _onTapNextScreen,
-            child: const Text('Save'),
+          GetBuilder<PasswordController>(
+              builder: (controller) {
+                return Visibility(
+                  visible: !controller.inProgress,
+                  replacement: const TMProgressIndicator(),
+                  child: ElevatedButton(
+                    onPressed: _onTapNextScreen,
+                    child: const Text('Verify'),
+                  ),
+                );
+              }
           ),
           SizedBox(height: size.height * 0.046),
         ],

@@ -1,4 +1,4 @@
-import 'package:task_manager_get_x/UI/screens/user_auth/sing_in/model/user_data_model.dart';
+import 'package:task_manager_get_x/UI/screens/user_auth/profile/model/user_data_model.dart';
 
 class LongInModel {
   String? status;
