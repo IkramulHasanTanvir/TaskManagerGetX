@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:task_manager_get_x/UI/screens/user_auth/profile/model/user_data_model.dart';
+import 'package:task_manager_get_x/data/data_controller/auth_controller.dart';
 import 'package:task_manager_get_x/data/models/network_response.dart';
 import 'package:task_manager_get_x/data/services/network_caller.dart';
 import 'package:task_manager_get_x/data/utils/urls.dart';
@@ -17,7 +19,7 @@ class ProfileUpdateController extends GetxController {
   String? get successMessage => _successMessage;
 
   Future<bool> updateProfile(String email, String firstName, String lastName,
-      String mobile, String password) async {
+      String mobile, String password, String photo) async {
     bool isSuccess = false;
     _inProgress = true;
     update();
@@ -32,14 +34,21 @@ class ProfileUpdateController extends GetxController {
     if (password != '') {
       requestBody['password'] = password;
     }
+    if (photo != '') {
+      requestBody['photo'] = photo;
+    }
 
     NetworkResponse networkResponse = await NetworkCaller.postRequest(
-      url: Urls.registration,
+      url: Urls.profileUpdate,
       body: requestBody,
     );
     if (networkResponse.isSuccess) {
+      final UserData userData = UserData.fromJson(
+        networkResponse.responseBody,
+      );
+      await AuthController.saveUserData(userData);
       isSuccess = true;
-      _successMessage = 'Account created';
+      _successMessage = 'Profile updated';
     } else {
       _errorMessage = networkResponse.errorMassage;
     }

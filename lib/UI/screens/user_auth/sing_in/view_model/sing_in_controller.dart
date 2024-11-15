@@ -34,6 +34,7 @@ class SingInController extends GetxController {
       final LongInModel longInModel =
           LongInModel.fromJson(networkResponse.responseBody);
       await AuthController.saveAccessToken(longInModel.token!);
+      await AuthController.saveUserData(longInModel.userData!);
       isSuccess = true;
     } else {
       _errorMessage = networkResponse.errorMassage;

@@ -12,7 +12,7 @@ class TmAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.grey[700],
+      backgroundColor: Colors.grey[300],
       title: isProfile
           ? ListTile(
               onTap: () {
@@ -29,16 +29,16 @@ class TmAppBar extends StatelessWidget implements PreferredSizeWidget {
                   color: Colors.grey[400],
                 ),
               ),
-              title: const Text(
-                'Tanvir Hridoy',
-                style: TextStyle(
+              title:  Text(
+                AuthController.userData?.fullName ?? '',
+                style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              subtitle: const Text(
-                'tanvirhridoy@gmail.com',
-                style: TextStyle(
+              subtitle:  Text(
+                AuthController.userData?.email ?? '',
+                style: const TextStyle(
                   color: Colors.black,
                 ),
               ),

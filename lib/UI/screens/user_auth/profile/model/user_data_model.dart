@@ -8,6 +8,8 @@ class UserData {
   String? createdDate;
   String? photo;
 
+  String get fullName => '${firstName ?? ''} ${lastName ?? ''}';
+
   UserData(
       {this.sId,
         this.email,

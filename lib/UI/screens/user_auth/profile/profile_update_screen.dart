@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:task_manager_get_x/UI/app_bar/tm_app_bar.dart';
+import 'package:task_manager_get_x/UI/screens/user_auth/profile/widgets/update_profile_form.dart';
 import 'package:task_manager_get_x/common/utils/app_padding.dart';
 
 class ProfileUpdateScreen extends StatefulWidget {
@@ -12,17 +13,11 @@ class ProfileUpdateScreen extends StatefulWidget {
 }
 
 class _ProfileUpdateScreenState extends State<ProfileUpdateScreen> {
-  final TextEditingController _emailTEController = TextEditingController();
-  final TextEditingController _firstNameTEController = TextEditingController();
-  final TextEditingController _lastNameTEController = TextEditingController();
-  final TextEditingController _mobileTEController = TextEditingController();
-  final TextEditingController _passwordTEController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
     final Size size = MediaQuery.sizeOf(context);
-
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: const TmAppBar(
@@ -59,76 +54,12 @@ class _ProfileUpdateScreenState extends State<ProfileUpdateScreen> {
                     ),
                   ),
                 ),
-                _buildFormSection(size),
+                const UpdateProfileForm(),
               ],
             ),
           ),
         ),
       ),
     );
-  }
-
-  Widget _buildFormSection(size) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(height: size.height * 0.026),
-        TextFormField(
-          controller: _emailTEController,
-          keyboardType: TextInputType.emailAddress,
-          decoration: const InputDecoration(
-            labelText: 'Email',
-          ),
-        ),
-        SizedBox(height: size.height * 0.010),
-        TextFormField(
-          controller: _firstNameTEController,
-          decoration: const InputDecoration(
-            labelText: 'First Name',
-          ),
-        ),
-        SizedBox(height: size.height * 0.010),
-        TextFormField(
-          controller: _lastNameTEController,
-          decoration: const InputDecoration(
-            labelText: 'Last Name',
-          ),
-        ),
-        SizedBox(height: size.height * 0.010),
-        TextFormField(
-          controller: _mobileTEController,
-          keyboardType: TextInputType.phone,
-          decoration: const InputDecoration(
-            labelText: 'Mobile',
-          ),
-        ),
-        SizedBox(height: size.height * 0.010),
-        TextFormField(
-          controller: _passwordTEController,
-          obscureText: true,
-          decoration: const InputDecoration(
-            labelText: 'Password',
-          ),
-        ),
-        SizedBox(height: size.height * 0.036),
-        ElevatedButton(
-          onPressed: _onTapNextScreen,
-          child: const Text('Save'),
-        ),
-        SizedBox(height: size.height * 0.046),
-      ],
-    );
-  }
-
-  void _onTapNextScreen() {}
-
-  @override
-  void dispose() {
-    super.dispose();
-    _emailTEController.dispose();
-    _firstNameTEController.dispose();
-    _lastNameTEController.dispose();
-    _mobileTEController.dispose();
-    _passwordTEController.dispose();
   }
 }
