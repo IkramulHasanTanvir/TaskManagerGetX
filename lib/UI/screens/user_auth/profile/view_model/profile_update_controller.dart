@@ -42,9 +42,8 @@ class ProfileUpdateController extends GetxController {
       "firstName": firstName,
       "lastName": lastName,
       "mobile": mobile,
-      "password": password
     };
-    if (password == '') {
+    if (password != '') {
       requestBody['password'] = password;
     }
     if (_selectedImage != null) {
