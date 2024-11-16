@@ -9,7 +9,7 @@ class NeumorphismBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(
-      horizontal: 16.0,
+      horizontal: 12.0,
       vertical: 8,
     ),
       decoration: BoxDecoration(

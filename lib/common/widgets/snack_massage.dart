@@ -5,6 +5,6 @@ void snackMassage(bool isError, String message) {
   Get.snackbar(
     isError == true ? 'error' : 'success',
     message,
-    colorText: isError == true ? Colors.red : Colors.green,
+    leftBarIndicatorColor: isError == true ? Colors.red : Colors.green,
   );
 }

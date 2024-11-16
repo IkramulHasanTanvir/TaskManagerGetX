@@ -12,7 +12,7 @@ class SummaryCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(right: 12.0),
       child: SizedBox(
-        width: 109,
+        width: 98,
         child: NeumorphismBox(
           child: Column(
             children: [

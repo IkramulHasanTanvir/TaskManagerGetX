@@ -96,9 +96,16 @@ class _SingInFormSectionState extends State<SingInFormSection> {
       _emailTEController.text.trim(),
       _passwordTEController.text,
     );
-    if (result == false) {
+    if (result) {
+      _clearField();
+    } else {
       snackMassage(true, singInController.errorMessage!);
     }
+  }
+
+  void _clearField() {
+    _emailTEController.clear();
+    _passwordTEController.clear();
   }
 
   @override

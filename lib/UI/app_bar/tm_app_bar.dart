@@ -13,7 +13,7 @@ class TmAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final image = AuthController.userData?.photo;
     return AppBar(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: isProfile ? Colors.grey[400] : Colors.grey[300],
       title: isProfile
           ? ListTile(
               onTap: () {
@@ -57,5 +57,5 @@ class TmAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(70);
+  Size get preferredSize => const Size.fromHeight(64);
 }
