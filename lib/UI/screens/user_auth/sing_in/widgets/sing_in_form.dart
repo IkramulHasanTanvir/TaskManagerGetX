@@ -55,6 +55,7 @@ class _SingInFormSectionState extends State<SingInFormSection> {
           SizedBox(height: size.height * 0.010),
           TextFormField(
             controller: _passwordTEController,
+            obscureText: true,
             keyboardType: TextInputType.emailAddress,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             decoration: const InputDecoration(
