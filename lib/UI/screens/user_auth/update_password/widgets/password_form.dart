@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:task_manager_get_x/UI/screens/user_auth/sing_in/sing_in_screen.dart';
 import 'package:task_manager_get_x/UI/screens/user_auth/update_password/view_model/password_controller.dart';
 import 'package:task_manager_get_x/common/widgets/snack_massage.dart';
 import 'package:task_manager_get_x/common/widgets/tm_progress_indicator.dart';
@@ -75,7 +74,7 @@ class _PasswordFormState extends State<PasswordForm> {
                   replacement: const TMProgressIndicator(),
                   child: ElevatedButton(
                     onPressed: _onTapNextScreen,
-                    child: const Text('Verify'),
+                    child: const Text('Update'),
                   ),
                 );
               }
@@ -91,7 +90,6 @@ class _PasswordFormState extends State<PasswordForm> {
       return;
     }
     _updatePassword();
-    Get.offAllNamed(SingInScreen.name);
   }
 
   Future<void> _updatePassword() async {
@@ -101,9 +99,9 @@ class _PasswordFormState extends State<PasswordForm> {
       _newPasswordTEController.text,
     );
     if(result){
-      snackMassage(false, _passwordController.errorMessage!);
+      snackMassage(false, _passwordController.successMessage!);
     }else{
-      snackMassage(false, _passwordController.errorMessage!);
+      snackMassage(true, _passwordController.errorMessage!);
     }
   }
 

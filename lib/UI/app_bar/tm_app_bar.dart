@@ -11,6 +11,7 @@ class TmAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final image = AuthController.userData?.photo;
     return AppBar(
       backgroundColor: Colors.grey[300],
       title: isProfile
@@ -22,21 +23,23 @@ class TmAppBar extends StatelessWidget implements PreferredSizeWidget {
               leading: CircleAvatar(
                 backgroundColor: Colors.grey[200],
                 radius: 30,
-                backgroundImage: const NetworkImage(''),
-                child: Icon(
-                  Icons.person,
-                  size: 44,
-                  color: Colors.grey[400],
-                ),
+                backgroundImage: image != null ? NetworkImage(image) : null,
+                child: image == null
+                    ? Icon(
+                        Icons.person,
+                        size: 44,
+                        color: Colors.grey[400],
+                      )
+                    : null,
               ),
-              title:  Text(
+              title: Text(
                 AuthController.userData?.fullName ?? '',
                 style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              subtitle:  Text(
+              subtitle: Text(
                 AuthController.userData?.email ?? '',
                 style: const TextStyle(
                   color: Colors.black,

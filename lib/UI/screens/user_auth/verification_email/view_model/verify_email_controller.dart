@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:task_manager_get_x/UI/screens/user_auth/otp_verify/otp_verify_screen.dart';
 import 'package:task_manager_get_x/data/models/network_response.dart';
 import 'package:task_manager_get_x/data/services/network_caller.dart';
 import 'package:task_manager_get_x/data/utils/urls.dart';
@@ -25,8 +26,9 @@ class VerifyEmailController extends GetxController {
       url: Urls.recoverVerifyEmail(email),
     );
     if (networkResponse.isSuccess) {
-      isSuccess = true;
+      Get.to(() => OtpScreen(email: email));
       _successMessage = 'A 6 digit OTP code sent to your email';
+      isSuccess = true;
     } else {
       _errorMessage = networkResponse.errorMassage;
     }

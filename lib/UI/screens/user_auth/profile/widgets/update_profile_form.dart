@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task_manager_get_x/UI/screens/user_auth/profile/view_model/profile_update_controller.dart';
 import 'package:task_manager_get_x/common/widgets/snack_massage.dart';
+import 'package:task_manager_get_x/common/widgets/tm_progress_indicator.dart';
 import 'package:task_manager_get_x/data/data_controller/auth_controller.dart';
 
 class UpdateProfileForm extends StatefulWidget {
@@ -17,6 +18,8 @@ class _UpdateProfileFormState extends State<UpdateProfileForm> {
   final TextEditingController _lastNameTEController = TextEditingController();
   final TextEditingController _mobileTEController = TextEditingController();
   final TextEditingController _passwordTEController = TextEditingController();
+  final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
+
 
   final ProfileUpdateController _profileUpdateController =
       Get.find<ProfileUpdateController>();
@@ -37,61 +40,73 @@ class _UpdateProfileFormState extends State<UpdateProfileForm> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.sizeOf(context);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(height: size.height * 0.026),
-        TextFormField(
-          enabled: false,
-          controller: _emailTEController,
-          keyboardType: TextInputType.emailAddress,
-          decoration: const InputDecoration(
-            labelText: 'Email',
+    return Form(
+      key: _globalKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: size.height * 0.026),
+          TextFormField(
+            enabled: false,
+            controller: _emailTEController,
+            keyboardType: TextInputType.emailAddress,
+            decoration: const InputDecoration(
+              labelText: 'Email',
+            ),
           ),
-        ),
-        SizedBox(height: size.height * 0.010),
-        TextFormField(
-          controller: _firstNameTEController,
-          decoration: const InputDecoration(
-            labelText: 'First Name',
+          SizedBox(height: size.height * 0.010),
+          TextFormField(
+            controller: _firstNameTEController,
+            decoration: const InputDecoration(
+              labelText: 'First Name',
+            ),
+
           ),
-        ),
-        SizedBox(height: size.height * 0.010),
-        TextFormField(
-          controller: _lastNameTEController,
-          decoration: const InputDecoration(
-            labelText: 'Last Name',
+          SizedBox(height: size.height * 0.010),
+          TextFormField(
+            controller: _lastNameTEController,
+            decoration: const InputDecoration(
+              labelText: 'Last Name',
+            ),
           ),
-        ),
-        SizedBox(height: size.height * 0.010),
-        TextFormField(
-          controller: _mobileTEController,
-          keyboardType: TextInputType.phone,
-          decoration: const InputDecoration(
-            labelText: 'Mobile',
+          SizedBox(height: size.height * 0.010),
+          TextFormField(
+            controller: _mobileTEController,
+            keyboardType: TextInputType.phone,
+            decoration: const InputDecoration(
+              labelText: 'Mobile',
+            ),
           ),
-        ),
-        SizedBox(height: size.height * 0.010),
-        TextFormField(
-          controller: _passwordTEController,
-          obscureText: true,
-          decoration: const InputDecoration(
-            labelText: 'Password',
+          SizedBox(height: size.height * 0.010),
+          TextFormField(
+            controller: _passwordTEController,
+            obscureText: true,
+            decoration: const InputDecoration(
+              labelText: 'Password',
+            ),
           ),
-        ),
-        SizedBox(height: size.height * 0.036),
-        ElevatedButton(
-          onPressed: _onTapNextScreen,
-          child: const Text('Save'),
-        ),
-        SizedBox(height: size.height * 0.046),
-      ],
+          SizedBox(height: size.height * 0.036),
+          GetBuilder<ProfileUpdateController>(builder: (controller) {
+            return Visibility(
+              visible: !controller.inProgress,
+              replacement: const TMProgressIndicator(),
+              child: ElevatedButton(
+                onPressed: _onTapNextScreen,
+                child: const Text('Save'),
+              ),
+            );
+          }),
+          SizedBox(height: size.height * 0.046),
+        ],
+      ),
     );
   }
 
   void _onTapNextScreen() {
+    if(!_globalKey.currentState!.validate()){
+      return;
+    }
     _updateProfile();
-    Get.back();
   }
 
   Future<void> _updateProfile() async {
@@ -101,11 +116,10 @@ class _UpdateProfileFormState extends State<UpdateProfileForm> {
       _lastNameTEController.text.trim(),
       _mobileTEController.text.trim(),
       _passwordTEController.text,
-      '',
     );
-    if(result){
+    if (result) {
       snackMassage(false, _profileUpdateController.successMessage!);
-    }else{
+    } else {
       snackMassage(false, _profileUpdateController.errorMessage!);
     }
   }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:task_manager_get_x/UI/screens/user_auth/otp_verify/otp_verify_screen.dart';
 import 'package:task_manager_get_x/UI/screens/user_auth/verification_email/view_model/verify_email_controller.dart';
 import 'package:task_manager_get_x/common/widgets/snack_massage.dart';
 import 'package:task_manager_get_x/common/widgets/tm_progress_indicator.dart';
@@ -44,9 +43,15 @@ class _VerifyEmailFormState extends State<VerifyEmailForm> {
             decoration: const InputDecoration(
               labelText: 'Email',
             ),
-            validator: (value) {
-              if (value!.isEmpty) {
-                return 'Enter valid value';
+            validator: (String? value) {
+              if (value?.isEmpty == true) {
+                return 'Enter valid email';
+              }
+              if (!value!.contains('@')) {
+                return "Enter valid email '@'";
+              }
+              if (!value.contains('.com')) {
+                return "Enter valid email '.com'";
               }
               return null;
             },
@@ -60,7 +65,7 @@ class _VerifyEmailFormState extends State<VerifyEmailForm> {
                 replacement: const TMProgressIndicator(),
                 child: ElevatedButton(
                   onPressed: _onTapNextScreen,
-                  child: const Text('Verify'),
+                  child: const Text('Next'),
                 ),
               );
             }
@@ -70,12 +75,11 @@ class _VerifyEmailFormState extends State<VerifyEmailForm> {
     );
   }
 
-  void _onTapNextScreen() {
+  void _onTapNextScreen()async {
     if (!_globalKey.currentState!.validate()) {
       return;
     }
     _verifyEmail();
-    Get.to(() => OtpScreen(email: _emailTEController.text,));
   }
 
   Future<void> _verifyEmail() async {

@@ -35,36 +35,46 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
       body: RefreshIndicator(
         onRefresh: () async {
           _getNewTask();
+          _getTaskStatus();
         },
         child: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.all(
-              AppPadding.defaultPadding,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: GetBuilder<TaskStatusController>(
-                    builder: (controller) {
-                      return Row(
-                        children: controller.taskCountList
-                            .map(
-                              (e) => SummaryCard(taskCountModel: e),
-                            )
-                            .toList(),
-                      );
-                    },
-                  ),
+          child: Column(
+            //crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: GetBuilder<TaskStatusController>(
+                  builder: (controller) {
+                    return Visibility(
+                      visible: !controller.inProgress,
+                      replacement: const TMProgressIndicator(),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 16,
+                        ),
+                        child: Row(
+                          children: controller.taskCountList
+                              .map(
+                                (e) => SummaryCard(taskCountModel: e),
+                              )
+                              .toList(),
+                        ),
+                      ),
+                    );
+                  },
                 ),
-                const SizedBox(height: 18),
-                Expanded(
-                  child: GetBuilder<NewTaskController>(
-                    builder: (controller) {
-                      return Visibility(
-                        visible: !controller.inProgress,
-                        replacement: const TMProgressIndicator(),
+              ),
+              const Divider(),
+              Expanded(
+                child: GetBuilder<NewTaskController>(
+                  builder: (controller) {
+                    return Visibility(
+                      visible: !controller.inProgress,
+                      replacement: const TMProgressIndicator(),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: AppPadding.defaultPadding),
                         child: ListView.separated(
                           itemCount: controller.taskList.length,
                           itemBuilder: (context, index) {
@@ -79,12 +89,12 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
                             );
                           },
                         ),
-                      );
-                    },
-                  ),
+                      ),
+                    );
+                  },
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

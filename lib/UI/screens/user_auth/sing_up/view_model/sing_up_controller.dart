@@ -35,8 +35,9 @@ class SingUpController extends GetxController {
       body: requestBody,
     );
     if (networkResponse.isSuccess) {
-      isSuccess = true;
+      Get.back();
       _successMessage = 'Account created';
+      isSuccess = true;
     } else {
       _errorMessage = networkResponse.errorMassage;
     }

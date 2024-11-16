@@ -18,12 +18,12 @@ class NeumorphismBox extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: Colors.grey.shade500,
-            offset: const Offset(4, 4),
+            offset: const Offset(1, 1),
             blurRadius: 16,
           ),
           const BoxShadow(
             color: Colors.white,
-            offset: Offset(-4, -4),
+            offset: Offset(-3, -3),
             blurRadius: 16,
           ),
         ],

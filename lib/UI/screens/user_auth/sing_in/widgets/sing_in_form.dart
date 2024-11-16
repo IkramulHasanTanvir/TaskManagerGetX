@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:task_manager_get_x/UI/screens/home/home_screen.dart';
 import 'package:task_manager_get_x/UI/screens/user_auth/sing_in/view_model/sing_in_controller.dart';
 import 'package:task_manager_get_x/common/widgets/snack_massage.dart';
 import 'package:task_manager_get_x/common/widgets/tm_progress_indicator.dart';
@@ -40,9 +39,15 @@ class _SingInFormSectionState extends State<SingInFormSection> {
             decoration: const InputDecoration(
               labelText: 'Email',
             ),
-            validator: (value) {
-              if (value!.trim().isEmpty) {
-                return 'Enter valid value';
+            validator: (String? value) {
+              if (value?.isEmpty == true) {
+                return 'Enter valid email';
+              }
+              if (!value!.contains('@')) {
+                return "Enter valid email '@'";
+              }
+              if (!value.contains('.com')) {
+                return "Enter valid email '.com'";
               }
               return null;
             },
@@ -91,10 +96,7 @@ class _SingInFormSectionState extends State<SingInFormSection> {
       _emailTEController.text.trim(),
       _passwordTEController.text,
     );
-    if (result) {
-      Get.offAllNamed(HomeScreen.name);
-      snackMassage(false, 'sing in success');
-    } else {
+    if (result == false) {
       snackMassage(true, singInController.errorMessage!);
     }
   }

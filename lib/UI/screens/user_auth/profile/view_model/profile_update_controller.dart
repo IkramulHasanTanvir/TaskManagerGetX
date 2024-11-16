@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:get/get.dart';
 import 'package:task_manager_get_x/UI/screens/user_auth/profile/model/user_data_model.dart';
 import 'package:task_manager_get_x/data/data_controller/auth_controller.dart';
@@ -14,12 +16,19 @@ class ProfileUpdateController extends GetxController {
 
   String? _successMessage;
 
+  File? _selectedImage;
+
   String? get errorMessage => _errorMessage;
 
   String? get successMessage => _successMessage;
 
+  void setImage(File image){
+    _selectedImage = image;
+    update();
+  }
+
   Future<bool> updateProfile(String email, String firstName, String lastName,
-      String mobile, String password, String photo) async {
+      String mobile, String password,) async {
     bool isSuccess = false;
     _inProgress = true;
     update();
@@ -34,8 +43,8 @@ class ProfileUpdateController extends GetxController {
     if (password != '') {
       requestBody['password'] = password;
     }
-    if (photo != '') {
-      requestBody['photo'] = photo;
+    if (_selectedImage != null) {
+      requestBody['photo'] = _selectedImage!.path;
     }
 
     NetworkResponse networkResponse = await NetworkCaller.postRequest(
@@ -43,12 +52,12 @@ class ProfileUpdateController extends GetxController {
       body: requestBody,
     );
     if (networkResponse.isSuccess) {
-      final UserData userData = UserData.fromJson(
-        networkResponse.responseBody,
+      final UserData userData = UserData.fromJson(requestBody,
       );
       await AuthController.saveUserData(userData);
-      isSuccess = true;
+      Get.back();
       _successMessage = 'Profile updated';
+      isSuccess = true;
     } else {
       _errorMessage = networkResponse.errorMassage;
     }

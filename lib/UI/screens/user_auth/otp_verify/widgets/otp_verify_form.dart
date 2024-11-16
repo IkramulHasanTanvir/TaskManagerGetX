@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:task_manager_get_x/UI/screens/user_auth/otp_verify/view_model/otp_verify_controller.dart';
-import 'package:task_manager_get_x/UI/screens/user_auth/update_password/update_password_screen.dart';
 import 'package:task_manager_get_x/common/widgets/snack_massage.dart';
 import 'package:task_manager_get_x/common/widgets/tm_progress_indicator.dart';
 
@@ -75,12 +74,6 @@ class _OtpVerifyFormState extends State<OtpVerifyForm> {
 
   void _onTapNextScreen() {
     _otpVerify();
-    Get.to(
-      UpdatePasswordScreen(
-        email: widget.email,
-        otp: _otpTEController.text.trim(),
-      ),
-    );
   }
 
   Future<void> _otpVerify() async {

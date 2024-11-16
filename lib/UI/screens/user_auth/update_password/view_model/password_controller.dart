@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:task_manager_get_x/UI/screens/user_auth/sing_in/sing_in_screen.dart';
 import 'package:task_manager_get_x/data/models/network_response.dart';
 import 'package:task_manager_get_x/data/services/network_caller.dart';
 import 'package:task_manager_get_x/data/utils/urls.dart';
@@ -32,8 +33,9 @@ class PasswordController extends GetxController {
       body: requestBody,
     );
     if (networkResponse.isSuccess) {
-      isSuccess = true;
+      Get.offAllNamed(SingInScreen.name);
       _successMessage = 'Password update successes';
+      isSuccess = true;
     } else {
       _errorMessage = networkResponse.errorMassage;
     }
